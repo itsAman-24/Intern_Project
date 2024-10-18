@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const CLIENT_ID = '421286045600-pi6tg2l6ldcpan0uosjughmpvjb6kn6j.apps.googleusercontent.com'; // Enter your client id
-const CUSTOMER_ID = 'C012345'; // Enter your google workspace customer id here
+const CLIENT_ID = '421286045600-pi6tg2l6ldcpan0uosjughmpvjb6kn6j.apps.googleusercontent.com'; 
+const CUSTOMER_ID = 'C012345'; 
 const DISCOVERY_DOCS = [
   'https://www.googleapis.com/discovery/v1/apis/admin/directory_v1/rest'
   // 'https://www.googleapis.com/discovery/v1/apis/admin/groups_v1/rest'
@@ -52,23 +52,23 @@ function App() {
     handleGoogleSignIn();
   }, [isSignedIn]);
 
-  // Handle the authentication response
+  // Handles the authentication response
   const handleCredentialResponse = (response) => {
     const token = response.credential;
     console.log('Access Token:', token);
 
-    // Initialize Google API client
+    // Initializing Google API client
     window.gapi.load('client', () => {
       initClient(token);
     });
   };
 
-  // Initialize Google API client with the access token
+  // Initializing Google API client with the access token
   const initClient = (token) => {
     window.gapi.client.init({
       discoveryDocs: DISCOVERY_DOCS,
     }).then(() => {
-      // Set the access token for authorized requests
+      // Setting the access token for authorized requests
       window.gapi.client.setToken({
         access_token: token
       });
@@ -82,7 +82,7 @@ function App() {
     });
   };
 
-  // Fetch users from Google Workspace Directory API
+  // Fetches users from Google Workspace Directory API
   const fetchUsers = () => {
     window.gapi.client.directory.users.list({
       customer: CUSTOMER_ID,
@@ -95,7 +95,7 @@ function App() {
     });
   };
 
-  // Fetch groups from Google Workspace Directory API
+  // Fetches groups from Google Workspace Directory API
   const fetchGroups = () => {
     window.gapi.client.directory.groups.list({
       customer: CUSTOMER_ID,
